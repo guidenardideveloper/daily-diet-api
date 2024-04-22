@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin123'
+      MYSQL_DATABASE: 'daily-diet-api'
+      MYSQL_ROOT_PASSWORD: 'admin123'
+    ports:
+      - '3307:3307'
+    expose:
+      - '3307'
+    volumes:
+      - /home/guilherme/Projects/daily-diet-api/mysql:/var/lib/mysql
