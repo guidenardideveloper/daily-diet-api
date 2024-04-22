@@ -9,8 +9,8 @@ services:
       MYSQL_DATABASE: 'daily-diet-api'
       MYSQL_ROOT_PASSWORD: 'admin123'
     ports:
-      - '3307:3307'
+      - '3306:3306'
     expose:
-      - '3307'
+      - '3306'
     volumes:
       - /home/guilherme/Projects/daily-diet-api/mysql:/var/lib/mysql
