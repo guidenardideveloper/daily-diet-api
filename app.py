@@ -10,6 +10,24 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://admin:admin123@127.0.0.
 db.init_app(app)
 
 
+@app.route("/read-meals", methods=["GET"])
+def read_meals():
+    meals = Meals.query.all()
+    meals_json = []
+
+    for meal in meals:
+        meals_dict = {
+            "id": meal.id,
+            "name_meal": meal.name_meal,
+            "description_meal": meal.description_meal,
+            "date": meal.date.strftime("%Y-%M-%D"),
+            "hour": meal.hour.strftime("%H:%M:%S"),
+            "in_the_diet": meal.in_the_diet
+        }
+        meals_json.append(meals_dict)
+    return jsonify(meals_json)
+    
+
 @app.route("/create-meal", methods=["POST"])
 def create_meal():
     data = request.json
