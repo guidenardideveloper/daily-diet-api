@@ -28,6 +28,24 @@ def create_meal():
 
     return jsonify({"message": "Refeição cadastrada com sucesso!"})
 
+
+@app.route("/update-meal/<int:id_meal>", methods=["PUT"])
+def update_meal(id_meal):
+    data = request.json
+    meal = Meals.query.get(id_meal)
+
+    if meal and data.get("name_meal"):
+        meal.name_meal = data.get("name_meal")
+        meal.description_meal = data.get("description_meal")
+        meal.date = data.get("date")
+        meal.hour = data.get("hour")
+        meal.in_the_diet = data.get("in_the_diet")
+        db.session.commit()
+
+        return jsonify({"message": "Refeição atualizada com sucesso."})
+    
+    return jsonify({"message": "Refeição não encontrada."}), 404
+
 @app.route("/hello-world", methods=["GET"])
 def hello_world():
     return "Hello World"
