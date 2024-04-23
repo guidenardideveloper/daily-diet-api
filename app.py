@@ -20,8 +20,8 @@ def read_meals():
             "id": meal.id,
             "name_meal": meal.name_meal,
             "description_meal": meal.description_meal,
-            "date": meal.date.strftime("%Y-%M-%D"),
-            "hour": meal.hour.strftime("%H:%M:%S"),
+            "date": meal.date.strftime("%Y-%m-%d"),
+            "hour": meal.hour.strftime("%H:%M"),
             "in_the_diet": meal.in_the_diet
         }
         meals_json.append(meals_dict)
