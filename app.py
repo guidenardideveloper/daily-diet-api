@@ -28,6 +28,24 @@ def read_meals():
     return jsonify(meals_json)
     
 
+@app.route("/unique-meal/<int:id_meal>", methods=["GET"])
+def unique_meal(id_meal):
+    meal = Meals.query.get(id_meal)
+    
+    if meal:
+        meal_dict = {
+            "id": meal.id,
+            "name_meal": meal.name_meal,
+            "description_meal": meal.description_meal,
+            "date": meal.date.strftime("%Y-%m-%d"),
+            "hour": meal.hour.strftime("%H:%M"),
+            "in_the_diet": meal.in_the_diet
+        }
+        return jsonify(meal_dict)
+    else:
+        return jsonify({"message": "Refeição não encontrada."}), 404
+
+
 @app.route("/create-meal", methods=["POST"])
 def create_meal():
     data = request.json
@@ -76,9 +94,6 @@ def delete_meal(id_meal):
     
     return jsonify({"message": "Refeição não encontrada."}), 404
 
-@app.route("/hello-world", methods=["GET"])
-def hello_world():
-    return "Hello World"
 
 if __name__ == "__main__":
     app.run(debug=True)
