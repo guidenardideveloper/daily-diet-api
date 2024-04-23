@@ -46,6 +46,18 @@ def update_meal(id_meal):
     
     return jsonify({"message": "Refeição não encontrada."}), 404
 
+
+@app.route("/delete-meal/<int:id_meal>", methods=["DELETE"])
+def delete_meal(id_meal):
+    meal = Meals.query.get(id_meal)
+
+    if meal:
+        db.session.delete(meal)
+        db.session.commit()
+        return jsonify({"message": "Refeição excluída com sucesso."})
+    
+    return jsonify({"message": "Refeição não encontrada."}), 404
+
 @app.route("/hello-world", methods=["GET"])
 def hello_world():
     return "Hello World"
